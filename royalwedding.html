@@ -132,7 +132,8 @@ var map = new mapboxgl.Map({
         center: [-0.596098, 51.481337],
         zoom: 13.82,
         speed: 0.5,
-        pitch: 58.50
+        pitch: 58.50,
+    interactive:false
 });
 var chapters = {
     'welcome': {
@@ -245,7 +246,7 @@ window.onscroll = function() {
         }
     }
 };
-var activeChapterName = 'baker';
+var activeChapterName = 'welcome';
 function setActiveChapter(chapterName) {
     if (chapterName === activeChapterName) return;
     map.flyTo(chapters[chapterName]);
