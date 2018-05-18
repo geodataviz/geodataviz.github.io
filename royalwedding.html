@@ -1,1 +1,266 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8' />
+    <title></title>
+    <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+    <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.44.1/mapbox-gl.js'></script>
+    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.44.1/mapbox-gl.css' rel='stylesheet' />
+    <style>
+        body { margin:0; padding:0; }
+        #map { position:absolute; top:0; bottom:0; width:100%; }
+    </style>
+</head>
+<body>
+
+<style>
+#map {
+    position: fixed;
+    width:60%;
+}
+#features {
+    width: 40%;
+    margin-left: 60%;
+    font-family: Arial;
+    overflow-y: scroll;
+    background-color: #fafafa;
+}
+section {
+    padding:  25px 50px;
+    line-height: 25px;
+    border-bottom: 1px solid #ddd;
+    opacity: 0.25;
+    font-size: 20px;
+}
+section.active {
+    opacity: 0.75;
+}
+section:last-child {
+    border-bottom: none;
+    margin-bottom: 1000px;
+}
+</style>
+
+<div id='map'></div>
+<div id='features'>
+    <section id='welcome' class='active'>
+        <h3>The Royal Wedding</h3>
+        <h4>Prince Harry & Meghan Markle</h4><br>Saturday 19th May 2018<br><br>
+        <img src="https://raw.githubusercontent.com/egil1978/egil1978.github.io/master/Ordnance%20Survey%20Logo%20RGB_144.png" style="width:40%;height:40%;"><br>
+        <font size="1">Contains OS data © Crown copyright and database rights 2018</font>
+    </section>
+    <section id='section1'>
+        <h4>Windsor Castle</h4>
+        <p>09:30-11am<br>
+            Invited guests will arrive at Windsor Castle's Round Tower and enter the chapel through the South Door<br><br>
+            <img src="https://upload.wikimedia.org/wikipedia/commons/5/58/Windsor_Castle_Upper_Ward_Quadrangle_Corrected_2-_Nov_2006.jpg"style="width:80%;height:80%;"></p>
+    <font size="1">By Diliff - Own work, CC BY 2.5, https://commons.wikimedia.org/w/index.php?curid=13555228</font>
+    </section>
+    <section id='section2'>
+        <h4>Galilee Porch</h4>
+        <p>11:20am<br>
+            The royal family will arrive and enter through the Galilee Porch<br><br>
+            <img src="https://upload.wikimedia.org/wikipedia/commons/a/a2/Windsor_Castle_Hollar_Birds_Eye_view.jpg" style="width:80%;height:80%;"></p>
+    <font size="1">By Wenceslas_Hollar_-_Windsor_Castle_(State_2).jpg: Wenceslas Hollarderivative work: Hchc2009 (Wenceslas_Hollar_-_Windsor_Castle_(State_2).jpg) [Public domain], via Wikimedia Commons</font>
+    </section>
+    <section id='section3'>
+        <h4>West Steps</h4>
+        <p>11:45am<br>
+        Prince Harry and his best man the Duke of Cambridge will arrive at St George's Chapel West Steps<br><br>
+        11:55am<br>The Queen will be the last member of the royal family to arrive<br><br>
+        11:59am<br>Ms Markle arrives at the Chapel's West Steps with some of her bridesmaids and pageboys</p>
+    </section>
+    <section id='section4'>
+        <h4>Windsor Castle</h4>
+        <p>12:00am<br>
+        The wedding of Prince Harry to Megan Markle begins and will be conducted by the Archbishop of Canterbury and Dean of Windsor</p><br><br>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/6/6f/St._Georges_Chapel%2C_Windsor_Castle_%281%29.jpg" style="width:80%;height:80%;"><br>
+        <font size="1">By Aurelien Guichard from London, United Kingdom (WindsorUploaded by BaldBoris) [CC BY-SA 2.0 (https://creativecommons.org/licenses/by-sa/2.0)], via Wikimedia Commons</font>
+    </section>
+    <section id='section5'>
+        <h4>West Steps</h4><br>
+        <p>13:00pm<br>The service ends and the newlyweds emerge at the West Steps of the Chapel<br>
+        13:05pm<br>They begin their 25 minute procession</p>
+    </section>
+    <section id='section6'>
+        <h4>Castle Hill</h4><br>
+        <p>The procession begins by turning right onto Castle Hill</p><br>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/d/d5/Queen_Victoria%2C_Castle_Hill%2C_Windsor_-_geograph.org.uk_-_1223784.jpg" style="width:80%;height:80%;"><br>
+        <font size="1">R Sones [CC BY-SA 2.0 (https://creativecommons.org/licenses/by-sa/2.0)], via Wikimedia Commons</font>
+    </section>
+    <section id='section7'>
+        <h4>High Street</h4>
+        <p>It then turns left onto the High Street</p><br><br>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/1/1f/Windsor_High_Street_in_May_2012.jpg" style="width:80%;height:80%;"><br>
+        <font size="1">By Ed Webster (Flickr: Windsor High Street) [CC BY 2.0 (https://creativecommons.org/licenses/by/2.0)], via Wikimedia Commons</font>
+    </section>
+    <section id='section8'>
+        <h4>Sheet Street</h4>
+        <p>At the Soldier's Statue the procession then turns right onto Sheet Street</p>
+    </section>
+    <section id='section9'>
+        <h4>Kings Road</h4>
+        <p>The procession then continues onto Kings Road</p>
+    </section>
+    <section id='section10'>
+        <h4>Albert Road</h4>
+        <p>From Kings Road the newlyweds follow Albert Road</p>
+    </section>
+    <section id='section11'>
+        <h4>Long Walk</h4>
+        <p>The procession then turns left onto Long Walk</p>
+    </section>
+    <section id='section12'>
+        <h4>Windsor Castle</h4>
+        <p>The procession follows the picturesque Long Walk before returning back to Windsor Castle</p><br><br>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/8/8f/Windsor_Castle_at_Sunset_-_Nov_2006.jpg" style="width:80%;height:80%;"><br>
+        <font size="1">By Diliff - Own work, CC BY 2.5, https://commons.wikimedia.org/w/index.php?curid=3811084</font>
+    </section>
+    <section id='section13'>
+        <h4>Frogmore House</h4>
+        <p>19:00pm<br>The bride and groom leave Windsor Castle and head to Frogmore House for their evening reception hosted by the Prince of Wales</p><br>
+    <img src="https://upload.wikimedia.org/wikipedia/commons/c/c8/Frogmore_House_16-08-2014_front.jpg" style="width:80%;height:80%;"><br>
+        <font size="1">By Karen Roe from Bury St Edmunds, Suffolk, UK (Frogmore House 16-08-2014) [CC BY 2.0 (https://creativecommons.org/licenses/by/2.0)], via Wikimedia Commons</font>
+        </section>
+</div>
+<script>
+mapboxgl.accessToken = 'pk.eyJ1Ijoib3JkbmFuY2VzdXJ2ZXkiLCJhIjoiY2poYnIzbTdyMDM0djMwbzZxc2Y3eWE1aiJ9.OMcleHtc7VUC16mhY_Hs_g';
+var map = new mapboxgl.Map({
+    container: 'map',
+    style: 'mapbox://styles/geodataviz/cjh81d1ri6khi2snxlaivyhhg',
+        bearing: 0,
+        center: [-1.038997, 53.211250],
+        zoom: 6,
+        speed: 0.5,
+        pitch: 0
+});
+var chapters = {
+    'welcome': {
+        bearing: -0,
+        center: [-1.038997, 53.211250],
+        zoom: 6,
+        speed: 0.5,
+        pitch: 0
+    },
+    'section1': {
+        bearing: 43.20,
+        center: [-0.604176, 51.483852],
+        speed: 0.5,
+        zoom: 17.00,
+        pitch: 60
+    },
+    'section2': {
+        center: [-0.606898, 51.483794],
+        bearing: -20,
+        zoom: 17,
+        speed: 0.2,
+        pitch: 60
+    },
+    'section3': {
+        bearing: 75.20,
+        center: [-0.607539, 51.483557],
+        zoom: 17,
+        speed: 0.2,
+        pitch: 60
+    },
+    'section4': {
+        bearing: 0,
+        center: [-0.604509, 51.482991],
+        zoom: 16,
+        speed: 0.2,
+        pitch: 60
+    },
+    'section5': {
+        bearing: 122.40,
+        center: [-0.607651, 51.483606],
+        zoom: 17.6,
+        pitch: 60,
+        speed: 0.2
+    },
+    'section6': {
+        bearing: 65.6,
+        center: [-0.606244, 51.482524],
+        zoom: 16.6,
+        pitch: 19,
+        speed: 0.2
+    },
+    'section7': {
+        bearing: -34.40,
+        center: [-0.606113, 51.481587],
+        zoom: 16.6,
+        speed: 0.2,
+        pitch: 30
+    },
+    'section8': {
+        bearing: -160,
+        center: [-0.606832, 51.479852],
+        zoom: 16.6,
+        speed: 0.2,
+        pitch: 45
+    },
+    'section9': {
+        bearing: -176.80,
+        center: [-0.607754, 51.475536],
+        zoom: 15.6,
+        speed: 0.2,
+        pitch: 33.5
+    },
+    'section10': {
+        bearing: -100,
+        center: [-0.605433, 51.470751],
+        zoom: 16.6,
+        speed: 0.2,
+        pitch: 31.5
+    },
+    'section11': {
+        bearing: 8.8,
+        center: [-0.603282, 51.474353],
+        zoom: 15.6,
+        speed: 0.2,
+        pitch: 47.5
+    },
+    'section12': {
+        bearing: -27.20,
+        center: [-0.604300, 51.483383],
+        zoom: 16.6,
+        speed: 0.2,
+        pitch: 50.50
+    },
+    'section13': {
+        bearing: 32.80,
+        center: [-0.594869, 51.473776],
+        zoom: 17,
+        speed: 0.2,
+        pitch: 60
+    },
+};
+// On every scroll event, check which element is on screen
+window.onscroll = function() {
+    var chapterNames = Object.keys(chapters);
+    for (var i = 0; i < chapterNames.length; i++) {
+        var chapterName = chapterNames[i];
+        if (isElementOnScreen(chapterName)) {
+            setActiveChapter(chapterName);
+            break;
+        }
+    }
+};
+var activeChapterName = 'baker';
+function setActiveChapter(chapterName) {
+    if (chapterName === activeChapterName) return;
+    map.flyTo(chapters[chapterName]);
+    document.getElementById(chapterName).setAttribute('class', 'active');
+    document.getElementById(activeChapterName).setAttribute('class', '');
+    activeChapterName = chapterName;
+}
+function isElementOnScreen(id) {
+    var element = document.getElementById(id);
+    var bounds = element.getBoundingClientRect();
+    return bounds.top < window.innerHeight && bounds.bottom > 0;
+}
+</script>
+</body>
+</html>
+view rawresumap.html hosted with ❤ by GitHub
+
 
